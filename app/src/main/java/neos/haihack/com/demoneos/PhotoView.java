@@ -28,16 +28,16 @@ public class PhotoView extends Activity {
 
         // use a linear layout manager
         mLayoutManager = new GridLayoutManager(this, 3);
-        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return position == 0 ? 2 : 1;
-            }
-        });
+//        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//            @Override
+//            public int getSpanSize(int position) {
+//                return position == 0 ? 2 : 1;
+//            }
+//        });
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        PhotoAdapter adapter = new PhotoAdapter();
+        PhotoAdapter adapter = new PhotoAdapter(this);
         mRecyclerView.setAdapter(adapter);
 
         adapter.setData(listImage);
@@ -46,7 +46,11 @@ public class PhotoView extends Activity {
 
     public void creatData() {
         for (int i = 0; i < 30; i++) {
-            listImage.add("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTpRMXgFXPGv_RcMJi0X2-2dafTvNOkNFYezZVOprzkXmiIN6c7C54cug");
+            if(i%2==0){
+                listImage.add("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTtOJKsndFVg1nStYurZbpzITQc1m_VOw_Z5eWkK4F7vdQl5RGo");
+            }else {
+                listImage.add("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTpRMXgFXPGv_RcMJi0X2-2dafTvNOkNFYezZVOprzkXmiIN6c7C54cug");
+            }
         }
     }
 
