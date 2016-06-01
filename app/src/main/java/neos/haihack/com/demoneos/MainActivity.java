@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 import jp.taizan.android.vjap.VTextLayout;
 import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.utils.PhotoPickerIntent;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
 
@@ -25,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         Button btn = (Button) findViewById(R.id.btnSubmit);
         Button btnNext = (Button) findViewById(R.id.btnNext);
         vTextLayout = (VTextLayout) findViewById(R.id.vTextLayout);
-        vTextLayout.initContent("","");
+        vTextLayout.initContent("", "");
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vTextLayout.initContent("",input.getText().toString());
+                vTextLayout.initContent("", input.getText().toString().length() > 0 ? input.getText().toString() : "");
             }
         });
 
