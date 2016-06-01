@@ -53,7 +53,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        Button showG = (Button) findViewById(R.id.btn_zoom_img);
+        showG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, PhotoView.class);
+//                PhotoPickerIntent.setPhotoCount(intent, 9);
+//                PhotoPickerIntent.setColumn(intent, 4);
+//                startActivityForResult(intent, 9);
+                startActivity(i);
+            }
+        });
 
     }
 
