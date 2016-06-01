@@ -22,6 +22,10 @@
 
         <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6d34f93bfff974db392827c3aa5a05af6cde31f5" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
