@@ -151,8 +151,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ItemGridView
         // Set the pivot point for SCALE_X and SCALE_Y transformations to the
         // top-left corner of
         // the zoomed-in view (the default is the center of the view).
-        expandedImageView.setPivotX(0f);
-        expandedImageView.setPivotY(0f);
+        linearLayout.setPivotX(0f);
+        linearLayout.setPivotY(0f);
 
         // Construct and run the parallel animation of the four translation and
         // scale properties
@@ -161,13 +161,13 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ItemGridView
 
         AnimatorSet set = new AnimatorSet();
         set.play(
-                ObjectAnimator.ofFloat(expandedImageView, View.X,
+                ObjectAnimator.ofFloat(linearLayout, View.X,
                         startBounds.left, finalBounds.left))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.Y, 0, 0))
+                .with(ObjectAnimator.ofFloat(linearLayout, View.Y, 0, 0))
 //                        startBounds.top, finalBounds.top))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_X,
+                .with(ObjectAnimator.ofFloat(linearLayout, View.SCALE_X,
                         startScale, 1f))
-                .with(ObjectAnimator.ofFloat(expandedImageView, View.SCALE_Y,
+                .with(ObjectAnimator.ofFloat(linearLayout, View.SCALE_Y,
                         startScale, 1f));
         set.setDuration(mShortAnimationDuration);
         set.setInterpolator(new DecelerateInterpolator());
@@ -189,7 +189,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ItemGridView
         // original bounds
         // and show the thumbnail instead of the expanded image.
         final float startScaleFinal = startScale;
-        expandedImageView.setOnClickListener(new View.OnClickListener() {
+        linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mCurrentAnimator != null) {
@@ -202,13 +202,13 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ItemGridView
                 mShortAnimationDuration = 100;
                 AnimatorSet set = new AnimatorSet();
                 set.play(
-                        ObjectAnimator.ofFloat(expandedImageView, View.X,
+                        ObjectAnimator.ofFloat(linearLayout, View.X,
                                 startBounds.left))
-                        .with(ObjectAnimator.ofFloat(expandedImageView, View.Y,
+                        .with(ObjectAnimator.ofFloat(linearLayout, View.Y,
                                 startBounds.top))
-                        .with(ObjectAnimator.ofFloat(expandedImageView,
+                        .with(ObjectAnimator.ofFloat(linearLayout,
                                 View.SCALE_X, startScaleFinal))
-                        .with(ObjectAnimator.ofFloat(expandedImageView,
+                        .with(ObjectAnimator.ofFloat(linearLayout,
                                 View.SCALE_Y, startScaleFinal));
                 set.setDuration(mShortAnimationDuration);
                 set.setInterpolator(new DecelerateInterpolator());
@@ -216,14 +216,14 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ItemGridView
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         thumbView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
+                        linearLayout.setVisibility(View.GONE);
                         mCurrentAnimator = null;
                     }
 
                     @Override
                     public void onAnimationCancel(Animator animation) {
                         thumbView.setAlpha(1f);
-                        expandedImageView.setVisibility(View.GONE);
+                        linearLayout.setVisibility(View.GONE);
                         mCurrentAnimator = null;
                     }
                 });
